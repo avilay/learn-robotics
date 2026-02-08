@@ -5,16 +5,17 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = "==3.13.11"
 dependencies = [
-    
     "ipykernel>=7.1.0",
     "matplotlib>=3.10.8",
     "numpy>=2.2,<2.4",
     "torch",
     "gym-hil>=0.1.13",
     "labmaze>=1.0.6",
-    "lerobot[hilserl,aloha]"
+    "torchvision",
+    "lerobot[aloha,async,feetech,hilserl,kinematics,peft,phone,pusht,smolvla,xvla]>=0.4.3",
+    "rerun-sdk[notebook]>=0.26.2",
 ]
 
 [tool.uv.sources]
 torch = { path = "wheels/torch-2.7.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl" }
-lerobot = { path = "wheels/lerobot-0.4.3-py3-none-any.whl" }
+torchvision = { path = "wheels/torchvision-0.22.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl" }
