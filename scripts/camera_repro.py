@@ -9,7 +9,8 @@ from matplotlib import pyplot as plt
 # RESOLVED: The problem was that I was running both the cameras through the same USB port via a USB
 # hub and therefore ran into a resource limitation issue. After connecting the cameras to different
 # physical USB ports, everything started working.
-
+# For now both the robots are on USB2, the gripper cam is also on USB2, the env cam only has a USB-C
+# port, so it is using that.
 
 def using_opencv_api(ports):
     print(f"\nChecking port {ports[0]}")
