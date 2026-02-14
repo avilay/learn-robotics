@@ -12,3 +12,4 @@ wheels/
 # Misc
 .vscode/
 .claude/
+outputs/

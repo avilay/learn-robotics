@@ -160,3 +160,9 @@ lerobot-record \
 --dataset.reset_time_s=10
 ```
 
+To make my life easier and not have to find ports everytime I disconnect and reconnect my laptop to my USB hubs, I have written `setenv.py` script that will set the YANTRA_* environment variables by automatically detecting the USB ports on which my robots and cameras are connected. I need to follow this sequence:
+  1. `cd <projectdir>`
+  2. `source .venv/bin/activate.fish`
+  3. `python setenv.py | source`
+
+I have put these three commands in a fish function called `robotics` in my fish config.

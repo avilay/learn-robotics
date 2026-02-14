@@ -1,6 +1,7 @@
 import logging
 import os
 import readline  # noqa: F401
+import sys
 import time
 from pathlib import Path
 
@@ -16,8 +17,8 @@ logging.basicConfig(
     level=logging.ERROR, handlers=(logging.StreamHandler(),), force=True
 )
 
-YANTRA_ROBOT = os.environ["YANTRA_ROBOT"]
-YANTRA_TELEOP = os.environ["YANTRA_TELEOP"]
+ROBOT = os.environ["YANTRA_ROBOT"]
+TELEOP = os.environ["YANTRA_TELEOP"]
 GRIPPER_CAMERA = Path(os.environ["YANTRA_GRIPPER_CAMERA"])
 ENV_CAMERA = Path(os.environ["YANTRA_ENV_CAMERA"])
 
@@ -33,7 +34,7 @@ def robot_wirecheck():
     print("\nCHECKING ROBOT")
     print("--------------")
     robot_cfg = SO101FollowerConfig(
-        port=YANTRA_ROBOT,
+        port=ROBOT,
         id="yantra_robot",
         cameras={
             "env": OpenCVCameraConfig(
@@ -47,8 +48,15 @@ def robot_wirecheck():
 
     robot = SO101Follower(robot_cfg)
     robot.connect(calibrate=False)
-    print(f"Is calibrated: {robot.is_calibrated}")
-    print(f"Is connected: {robot.is_connected}")
+    # Connection failure will result in lerobot raising an exception that is handled in main
+    if not robot.is_calibrated:
+        click.secho(
+            f"Robot is not calibrated! Check your USB ports, maybe the teleop robot is connected to {ROBOT}."
+        )
+        sys.exit(1)
+
+    click.secho(f"Is calibrated: {robot.is_calibrated}", fg="green")
+    click.secho(f"Is connected: {robot.is_connected}", fg="green")
 
     obs = robot.get_observation()
     print("Motor Positions:")
@@ -82,12 +90,20 @@ def robot_wirecheck():
 def teleop_wirecheck():
     print("\nCHECKING TELEOP")
     print("---------------")
-    teleop_cfg = SO101LeaderConfig(port=YANTRA_TELEOP, id="yantra_teleop")
+    teleop_cfg = SO101LeaderConfig(port=TELEOP, id="yantra_teleop")
 
     teleop = SO101Leader(teleop_cfg)
     teleop.connect(calibrate=False)
-    print(f"Is calibrated: {teleop.is_calibrated}")
-    print(f"Is connected: {teleop.is_connected}")
+
+    # Connection failure will result in lerobot raising an exception that is handled in main
+    if not teleop.is_calibrated:
+        click.secho(
+            "Teleop robot is not calibrated! Check your USB ports, maybe the main robot is connected to {TELEOP}."
+        )
+        sys.exit(1)
+
+    click.secho(f"Is calibrated: {teleop.is_calibrated}", fg="green")
+    click.secho(f"Is connected: {teleop.is_connected}", fg="green")
 
     action = teleop.get_action()
     print("Motor Positions:")
@@ -118,8 +134,8 @@ def teleop_wirecheck():
 def main(check_what):
     print("ENVIRONMENT VARIABLES:")
     print("----------------------")
-    print(f"YANTRA_ROBOT: {YANTRA_ROBOT}")
-    print(f"YANTRA_TELEOP: {YANTRA_TELEOP}")
+    print(f"YANTRA_ROBOT: {ROBOT}")
+    print(f"YANTRA_TELEOP: {TELEOP}")
     print(f"YANTRA_GRIPPER_CAMERA: {GRIPPER_CAMERA}")
     print(f"YANTRA_ENV_CAMERA: {ENV_CAMERA}")
 
