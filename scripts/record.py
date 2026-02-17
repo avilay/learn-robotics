@@ -11,6 +11,7 @@ from lerobot.processor import make_default_processors
 from lerobot.robots.so_follower import SO101Follower, SO101FollowerConfig
 from lerobot.scripts.lerobot_record import record_loop
 from lerobot.teleoperators.so_leader import SO101Leader, SO101LeaderConfig
+from lerobot.utils.control_utils import init_keyboard_listener
 from lerobot.utils.utils import log_say
 from lerobot.utils.visualization_utils import init_rerun
 
@@ -21,27 +22,35 @@ logging.basicConfig(
 )
 
 
-YANTRA_ROBOT = os.environ["YANTRA_ROBOT"]
-YANTRA_TELEOP = os.environ["YANTRA_TELEOP"]
+ROBOT = os.environ["YANTRA_ROBOT"]
+TELEOP = os.environ["YANTRA_TELEOP"]
 GRIPPER_CAMERA = Path(os.environ["YANTRA_GRIPPER_CAMERA"])
 ENV_CAMERA = Path(os.environ["YANTRA_ENV_CAMERA"])
 
 
 @click.command()
-@click.option("--num-episodes", default=5, help="Number of episodes to record.")
-@click.option("--episode-time", default=60, help="Duration of the episode in seconds.")
-@click.option("--reset-time", default=60, help="Reset time in seconds.")
+@click.option(
+    "--num-episodes", default=5, help="Number of episodes to record (defaults to 5)."
+)
+@click.option(
+    "--episode-time",
+    default=60,
+    help="Duration of the episode in seconds (defaults to 60).",
+)
+@click.option(
+    "--reset-time", default=60, help="Reset time in seconds (defaults to 60)."
+)
 @click.option(
     "--desc",
     default="",
-    help="Task description. If not proivded, the task name is used.",
+    help="Task description. If not proivded, TASK used.",
 )
 @click.argument("task")
 def main(num_episodes, episode_time, reset_time, desc, task):
     desc = desc or task
 
     robot_cfg = SO101FollowerConfig(
-        port=YANTRA_ROBOT,
+        port=ROBOT,
         id="yantra_robot",
         cameras={
             "gripper": OpenCVCameraConfig(
@@ -66,20 +75,25 @@ def main(num_episodes, episode_time, reset_time, desc, task):
         use_videos=True,
         image_writer_threads=4,
     )
+
+    # Initializing the keyboard listeners even though I won't use them because
+    # lerobot_record.py checks for events["exit_early"]
+    _, events = init_keyboard_listener()
     init_rerun(session_name="recording")
 
     robot.connect(calibrate=False)
 
-    teleop_cfg = SO101LeaderConfig(port=YANTRA_TELEOP, id="yantra_teleop")
+    teleop_cfg = SO101LeaderConfig(port=TELEOP, id="yantra_teleop")
     teleop = SO101Leader(teleop_cfg)
+    teleop.connect(calibrate=False)
 
     teleop_action_proc, robot_action_proc, robot_obs_proc = make_default_processors()
 
     for epidx in range(1, num_episodes + 1):
-        log_say(f"Recording episode {epidx + 1} of {num_episodes}")
+        log_say(f"Recording episode {epidx}")
         record_loop(
             robot=robot,
-            events={},
+            events=events,
             fps=30,
             teleop_action_processor=teleop_action_proc,
             robot_action_processor=robot_action_proc,
@@ -91,10 +105,10 @@ def main(num_episodes, episode_time, reset_time, desc, task):
             display_data=True,
         )
 
-        log_say("Rest the environment.")
+        log_say("Reset the environment.")
         record_loop(
             robot=robot,
-            events={},
+            events=events,
             fps=30,
             teleop_action_processor=teleop_action_proc,
             robot_action_processor=robot_action_proc,
