@@ -8,14 +8,31 @@ dependencies = [
     "ipykernel>=7.1.0",
     "matplotlib>=3.10.8",
     "numpy>=2.2,<2.4",
-    "torch",
     "gym-hil>=0.1.13",
     "labmaze>=1.0.6",
-    "torchvision",
     "lerobot[aloha,async,feetech,hilserl,kinematics,peft,phone,pusht,smolvla,xvla]>=0.4.3",
     "rerun-sdk[notebook]>=0.26.2",
 ]
 
+[project.optional-dependencies]
+cpu = ["torch", "torchvision"]
+cuda = ["torch", "torchvision"]
+
+[tool.uv]
+conflicts = [
+    [
+        { extra = "cpu" },
+        { extra = "cuda" },
+    ],
+]
+
 [tool.uv.sources]
-torch = { path = "wheels/torch-2.7.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl" }
-torchvision = { path = "wheels/torchvision-0.22.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl" }
+torch = [
+    { path = "wheels/torch-2.7.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cpu" },
+    { path = "wheels/torch-2.7.0+cu128-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cuda" },
+]
+
+torchvision = [
+    { path = "wheels/torchvision-0.22.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cpu" },
+    { path = "wheels/torchvision-0.22.0+cpu-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cuda" },
+]

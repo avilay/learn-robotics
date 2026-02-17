@@ -1,8 +1,7 @@
 # Learn Robotics
 
-When I `pip install lerobot` it installs an older version 0.3.2. To get the latest version tag 0.4.3, I need to build from source. In both the latest version and the one downloaded from PyPI, there is a hard dependency on PyTorch versions < 2.8, not sure why this is. PyTorch 2.8 wheels are only available for python 3.13. I have python 3.14 on my system, so all the hackery I have done below would've been needed even if PyPI gave me the right version.
-
 ## Installation
+When I `pip install lerobot` it installs an older version 0.3.2. To get the latest version tag 0.4.3, I need to build from source. In both the latest version and the one downloaded from PyPI, there is a hard dependency on PyTorch versions < 2.8, not sure why this is. PyTorch 2.8 wheels are only available for python 3.13. I have python 3.14 on my system, so all the hackery I have done below would've been needed even if PyPI gave me the right version.
 
 These instructions will work for any 64-bit Linux system.
 
