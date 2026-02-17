@@ -15,8 +15,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-cpu = ["torch", "torchvision"]
-cuda = ["torch", "torchvision"]
+cpu = ["torch>=2.7,<2.8", "torchvision"]
+cuda = ["torch>=2.7,<2.8", "torchvision"]
 
 [tool.uv]
 conflicts = [
@@ -28,11 +28,20 @@ conflicts = [
 
 [tool.uv.sources]
 torch = [
-    { path = "wheels/torch-2.7.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cpu" },
-    { path = "wheels/torch-2.7.0+cu128-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cuda" },
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu128", extra = "cuda" },
+]
+torchvision = [
+    { index = "pytorch-cpu", extra = "cpu" },
+    { index = "pytorch-cu128", extra = "cuda" },
 ]
 
-torchvision = [
-    { path = "wheels/torchvision-0.22.1+cpu-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cpu" },
-    { path = "wheels/torchvision-0.22.0+cpu-cp313-cp313-manylinux_2_28_x86_64.whl", extra = "cuda" },
-]
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
