@@ -6,17 +6,14 @@ readme = "README.md"
 requires-python = "==3.13.11"
 dependencies = [
     "ipykernel>=7.1.0",
-    "matplotlib>=3.10.8",
     "numpy>=2.2,<2.4",
-    "gym-hil>=0.1.13",
-    "labmaze>=1.0.6",
-    "lerobot[aloha,async,feetech,hilserl,kinematics,peft,phone,pusht,smolvla,xvla]>=0.4.3",
+    "matplotlib>=3.10.8",
     "rerun-sdk[notebook]>=0.26.2",
 ]
 
 [project.optional-dependencies]
-cpu = ["torch>=2.7,<2.8", "torchvision"]
-cuda = ["torch>=2.7,<2.8", "torchvision"]
+cpu = ["torch>=2.7,<2.8", "torchvision", "lerobot[aloha,pusht,async,peft,feetech,smolvla,xvla,hilserl,kinematics,phone]>=0.4.3"]
+cuda = ["torch>=2.7,<2.8", "torchvision", "lerobot[async,peft,smolvla,xvla,kinematics]>=0.4.3"]
 
 [tool.uv]
 conflicts = [
