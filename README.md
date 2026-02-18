@@ -22,25 +22,14 @@ These instructions will work for any 64-bit Linux system.
 ```
 
 This should install lerobot with the following extras:
-  * Simulation Environments
-    - aloha
-    - pusht
 
-  * Features
-    - async
-    - peft
-
-  * Motors
-    - feetech
-
-  * Policies
-    - hilserl
-    - smolvla
-    - xvla
-
-  * Robots
-    - kinematics
-    - phone
+| Extra           | GPU                     | CPU                    |
+| --------------- | ----------------------- | ---------------------- |
+| Simulation Envs | N/A                     | aloha, pusht           |
+| Features        | async, peft             | async, peft            |
+| Motors          | N/A                     | feetech                |
+| Policies        | smolvla, groot(?), xvla | smolvla, xvla, hilserl |
+| Robots          | kinematics              | kinematics, phone      |
 
 If I want to install other extras, remember to first uninstall lerobot and then re-install with the new extras.
 
@@ -165,3 +154,27 @@ To make my life easier and not have to find ports everytime I disconnect and rec
   3. `python setenv.py | source`
 
 I have put these three commands in a fish function called `robotics` in my fish config.
+
+```shell
+source .venv/bin/activate
+rm -fr outputs/train/act_pick_and_place_2
+wandb login
+lerobot-train \
+  --dataset.repo_id=avilay/pick_and_place \
+  --policy.type=act \
+  --output_dir=outputs/train/act_pick_and_place_2 \
+  --job_name=act_pick_and_place_2 \
+  --wandb.enable=true \
+  --policy.repo_id=avilay/my_policy \
+  --steps=1000
+```
+
+```shell
+sudo docker container run \
+  --gpus all \
+  --mount type=bind,source="$(pwd)",target=/learn-robotics/outputs \
+  -v /dev/shm:/dev/shm \
+  -it \
+  avilay/learn-robotics:v0.1.1 \
+  /bin/bash
+```

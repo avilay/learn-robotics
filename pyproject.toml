@@ -8,11 +8,10 @@ dependencies = [
     "ipykernel>=7.1.0",
     "numpy>=2.2,<2.4",
     "matplotlib>=3.10.8",
-    "rerun-sdk[notebook]>=0.26.2",
 ]
 
 [project.optional-dependencies]
-cpu = ["torch>=2.7,<2.8", "torchvision", "lerobot[aloha,pusht,async,peft,feetech,smolvla,xvla,hilserl,kinematics,phone]>=0.4.3"]
+cpu = ["torch>=2.7,<2.8", "torchvision","rerun-sdk[notebook]>=0.26.2", "lerobot[aloha,pusht,async,peft,feetech,smolvla,xvla,hilserl,kinematics,phone]>=0.4.3"]
 cuda = ["torch>=2.7,<2.8", "torchvision", "lerobot[async,peft,smolvla,xvla,kinematics]>=0.4.3"]
 
 [tool.uv]
