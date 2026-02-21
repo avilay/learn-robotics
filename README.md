@@ -155,26 +155,53 @@ To make my life easier and not have to find ports everytime I disconnect and rec
 
 I have put these three commands in a fish function called `robotics` in my fish config.
 
+
+In case I forget to upload my dataset when recording -
 ```shell
-source .venv/bin/activate
-rm -fr outputs/train/act_pick_and_place_2
-wandb login
-lerobot-train \
-  --dataset.repo_id=avilay/pick_and_place \
-  --policy.type=act \
-  --output_dir=outputs/train/act_pick_and_place_2 \
-  --job_name=act_pick_and_place_2 \
-  --wandb.enable=true \
-  --policy.repo_id=avilay/my_policy \
-  --steps=1000
+huggingface-cli upload avilay/pick_and_place ~/.cache/huggingface/lerobot/avilay/pick_and_place --repo-type dataset
+```
+
+```python
+from huggingface_hub import HfApi
+
+hub_api = HfApi()
+hub_api.create_tag("avilay/pick_and_place", tag="_version_", repo_type="dataset")
+```
+Here `_version_` is whatever is the `codebase_version` in the info.json in the meta dataset cache.
+
+```shell
+mkdir outputs
+
+sudo docker container run \
+  --gpus all \
+  --mount type=bind,source=./outputs,target=/learn-robotics/outputs \
+  -v /dev/shm:/dev/shm \
+  -it \
+  avilay/learn-robotics:v0.1.0 \
+  /bin/bash
 ```
 
 ```shell
-sudo docker container run \
-  --gpus all \
-  --mount type=bind,source="$(pwd)",target=/learn-robotics/outputs \
-  -v /dev/shm:/dev/shm \
-  -it \
-  avilay/learn-robotics:v0.1.1 \
-  /bin/bash
+source .venv/bin/activate
+
+export HUGGINGFACE_TOKEN=<hftok>
+export WANDB_API_KEY=<wandbapi>
+export JOB_NAME='pick_and_place_v0.1.0'
+export DATASET='avilay/pick_and_place_5'
+git config --global credential.helper store
+huggingface-cli login --token ${HUGGINGFACE_TOKEN} --add-to-git-credential
+wandb login --verify
+rm -fr outputs/train/${JOB_NAME}
+
+lerobot-train \
+  --dataset.repo_id=${DATASET} \
+  --policy.type=act \
+  --output_dir=outputs/train/${JOB_NAME} \
+  --job_name=${JOB_NAME} \
+  --wandb.enable=true \
+  --policy.repo_id=avilay/${JOB_NAME} \
+  --steps=1000
 ```
+
+On an A10 it takes 3 mins / 1000 steps to train. To train a full 100,000 steps it will take 5 hours.
+
