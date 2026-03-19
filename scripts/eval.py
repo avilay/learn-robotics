@@ -2,6 +2,7 @@ import logging
 import os
 import readline  # noqa: F401
 import shutil
+import time
 from pathlib import Path
 
 import click
@@ -13,7 +14,6 @@ from lerobot.policies.factory import make_pre_post_processors
 from lerobot.processor import make_default_processors
 from lerobot.robots.so_follower import SO101Follower, SO101FollowerConfig
 from lerobot.scripts.lerobot_record import record_loop
-from lerobot.teleoperators.so_leader import SO101Leader, SO101LeaderConfig
 from lerobot.utils.control_utils import init_keyboard_listener
 from lerobot.utils.utils import log_say
 from lerobot.utils.visualization_utils import init_rerun
@@ -26,7 +26,6 @@ logging.basicConfig(
 
 
 ROBOT = os.environ["YANTRA_ROBOT"]
-TELEOP = os.environ["YANTRA_TELEOP"]
 GRIPPER_CAMERA = Path(os.environ["YANTRA_GRIPPER_CAMERA"])
 ENV_CAMERA = Path(os.environ["YANTRA_ENV_CAMERA"])
 
@@ -40,8 +39,11 @@ ENV_CAMERA = Path(os.environ["YANTRA_ENV_CAMERA"])
     default=60,
     help="Duration of the episode in seconds (defaults to 60).",
 )
+@click.option(
+    "--reset-time", default=60, help="Reset time in seconds (defaults to 60)."
+)
 @click.argument("model")
-def main(num_episodes, episode_time, model):
+def main(num_episodes, episode_time, reset_time, model):
     task = f"eval_{model}"
     model_path = f"avilay/{model}"
     dataset_path = f"avilay/eval_{model}"
@@ -85,7 +87,10 @@ def main(num_episodes, episode_time, model):
 
     robot.connect(calibrate=False)
 
-    # {'device': 'cuda', 'float_dtype': None}
+    teleop_action_processor, robot_action_processor, robot_observation_processor = (
+        make_default_processors()
+    )
+
     preprocs, postprocs = make_pre_post_processors(
         policy_cfg=policy,  # type: ignore
         pretrained_path=model_path,
@@ -100,6 +105,9 @@ def main(num_episodes, episode_time, model):
             robot=robot,
             events=events,
             fps=30,
+            teleop_action_processor=teleop_action_processor,
+            robot_action_processor=robot_action_processor,
+            robot_observation_processor=robot_observation_processor,
             policy=policy,
             preprocessor=preprocs,
             postprocessor=postprocs,
@@ -110,6 +118,9 @@ def main(num_episodes, episode_time, model):
         )
 
         dataset.save_episode()
+
+        log_say("Reset the environment")
+        time.sleep(reset_time)
 
     log_say("Stop recording")
     robot.disconnect()
