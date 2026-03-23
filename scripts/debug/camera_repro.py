@@ -73,7 +73,7 @@ def using_lerobot_api(ports):
 @click.option("--opencv", "api", flag_value="opencv", help="Use the opencv API.")
 @click.option("--lerobot", "api", flag_value="lerobot", help="Use the lerobot API.")
 @click.option("--camera1", default="/dev/video0", help="The first camera to connect.")
-@click.option("--camera2", default="/dev/video50", help="The second camera to connect.")
+@click.option("--camera2", default="", help="The second camera to connect.")
 def main(api, camera1, camera2):
     """
     App to repro the camera bug.

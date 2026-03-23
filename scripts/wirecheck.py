@@ -38,10 +38,10 @@ def robot_wirecheck():
         id="yantra_robot",
         cameras={
             "env": OpenCVCameraConfig(
-                index_or_path=ENV_CAMERA, width=640, height=480, fps=30
+                index_or_path=ENV_CAMERA, width=640, height=480, fps=30, warmup_s=3
             ),
             "gripper": OpenCVCameraConfig(
-                index_or_path=GRIPPER_CAMERA, width=640, height=480, fps=30
+                index_or_path=GRIPPER_CAMERA, width=640, height=480, fps=30, warmup_s=3
             ),
         },
     )
@@ -151,6 +151,7 @@ def main(check_what):
             raise RuntimeError(f"Unknown option - {check_what}!")
     except Exception as err:
         click.secho(f"ERROR: {err}", fg="red")
+        raise
 
 
 if __name__ == "__main__":

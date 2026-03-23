@@ -54,10 +54,10 @@ def main(num_episodes, episode_time, reset_time, desc, task):
         id="yantra_robot",
         cameras={
             "gripper": OpenCVCameraConfig(
-                index_or_path=GRIPPER_CAMERA, width=640, height=480, fps=30
+                index_or_path=GRIPPER_CAMERA, width=640, height=480, fps=30, warmup_s=3
             ),
             "env": OpenCVCameraConfig(
-                index_or_path=ENV_CAMERA, width=640, height=480, fps=30
+                index_or_path=ENV_CAMERA, width=640, height=480, fps=30, warmup_s=3
             ),
         },
     )
