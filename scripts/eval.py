@@ -42,8 +42,9 @@ ENV_CAMERA = Path(os.environ["YANTRA_ENV_CAMERA"])
 @click.option(
     "--reset-time", default=60, help="Reset time in seconds (defaults to 60)."
 )
+@click.option("--local", is_flag=True, help="Keep the generated dataset local.")
 @click.argument("model")
-def main(num_episodes, episode_time, reset_time, model):
+def main(num_episodes, episode_time, reset_time, model, local):
     task = f"eval_{model}"
     model_path = f"avilay/{model}"
     dataset_path = f"avilay/eval_{model}"
@@ -124,8 +125,10 @@ def main(num_episodes, episode_time, reset_time, model):
 
     log_say("Stop recording")
     robot.disconnect()
-    dataset.finalize()
-    dataset.push_to_hub()
+
+    if not local:
+        dataset.finalize()
+        dataset.push_to_hub()
 
 
 if __name__ == "__main__":

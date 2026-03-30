@@ -89,7 +89,7 @@ lerobot-teleoperate \
 --robot.type=so101_follower \
 --robot.port=$YANTRA_ROBOT \
 --robot.id=yantra_robot \
---robot.cameras="{gripper: {type: opencv, index_or_path: $YANTRA_GRIPPER_CAMERA, width: 640, height: 480, fps: 30}, env: {type: opencv, index_or_path: $YANTRA_ENV_CAMERA, width: 640, height: 480, fps: 30}}" \
+--robot.cameras="{gripper: {type: opencv, index_or_path: $YANTRA_GRIPPER_CAMERA, width: 640, height: 480, fps: 30, warmup_s: 3}, env: {type: opencv, index_or_path: $YANTRA_ENV_CAMERA, width: 640, height: 480, fps: 30, warmup_s: 3}}" \
 --teleop.type=so101_leader \
 --teleop.port=$YANTRA_TELEOP \
 --teleop.id=yantra_teleop \
