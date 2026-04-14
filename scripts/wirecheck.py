@@ -17,10 +17,10 @@ logging.basicConfig(
     level=logging.ERROR, handlers=(logging.StreamHandler(),), force=True
 )
 
-ROBOT = os.environ["YANTRA_ROBOT"]
-TELEOP = os.environ["YANTRA_TELEOP"]
-GRIPPER_CAMERA = Path(os.environ["YANTRA_GRIPPER_CAMERA"])
-ENV_CAMERA = Path(os.environ["YANTRA_ENV_CAMERA"])
+ROBOT = os.environ["ZEROMODE_ROBOT"]
+TELEOP = os.environ["ZEROMODE_TELEOP"]
+GRIPPER_CAMERA = Path(os.environ["ZEROMODE_GRIPPER_CAMERA"])
+ENV_CAMERA = Path(os.environ["ZEROMODE_ENV_CAMERA"])
 
 
 def build_lerp(init, final, tot_ticks):
@@ -134,10 +134,10 @@ def teleop_wirecheck():
 def main(check_what):
     print("ENVIRONMENT VARIABLES:")
     print("----------------------")
-    print(f"YANTRA_ROBOT: {ROBOT}")
-    print(f"YANTRA_TELEOP: {TELEOP}")
-    print(f"YANTRA_GRIPPER_CAMERA: {GRIPPER_CAMERA}")
-    print(f"YANTRA_ENV_CAMERA: {ENV_CAMERA}")
+    print(f"ZEROMODE_ROBOT: {ROBOT}")
+    print(f"ZEROMODE_TELEOP: {TELEOP}")
+    print(f"ZEROMODE_GRIPPER_CAMERA: {GRIPPER_CAMERA}")
+    print(f"ZEROMODE_ENV_CAMERA: {ENV_CAMERA}")
 
     try:
         if check_what == "only-robot":

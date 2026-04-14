@@ -11,9 +11,12 @@ wheels/
 
 # Misc
 .vscode/
+.zed/
 .claude/
 outputs/
 .env
 __marimo__/
+scratch*.py
+*.html
 
 plan/

@@ -3,16 +3,22 @@ revision = 3
 requires-python = "==3.13.*"
 resolution-markers = [
     "sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
-    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
-    "platform_machine != 'aarch64' and sys_platform == 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and 'freebsd' not in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
+    "platform_machine != 'aarch64' and sys_platform == 'linux' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
+    "platform_machine != 'aarch64' and sys_platform == 'linux' and 'freebsd' not in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
     "sys_platform == 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
     "sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
     "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda'",
-    "sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
+    "sys_platform == 'linux' and 'freebsd' in sys_platform and extra == 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
+    "sys_platform == 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
     "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
     "sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
     "sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
-    "extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
+    "sys_platform != 'linux' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
+    "sys_platform != 'linux' and 'freebsd' not in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
+    "sys_platform == 'linux' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
+    "sys_platform == 'linux' and 'freebsd' not in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda'",
 ]
 conflicts = [[
     { package = "learn-robotics", extra = "cpu" },
@@ -203,7 +209,7 @@ name = "cffi"
 version = "2.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pycparser", marker = "implementation_name != 'PyPy' or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pycparser", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and implementation_name != 'PyPy') or (python_full_version != '3.13.*' and python_full_version == '3.13.*' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (implementation_name != 'PyPy' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (implementation_name != 'PyPy' and sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (implementation_name != 'PyPy' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (implementation_name == 'PyPy' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz", hash = "sha256:44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529", size = 523588, upload-time = "2025-09-08T23:24:04.541Z" }
 wheels = [
@@ -251,7 +257,7 @@ name = "click"
 version = "8.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz", hash = "sha256:12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a", size = 295065, upload-time = "2025-11-15T20:45:42.706Z" }
 wheels = [
@@ -265,6 +271,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/27/fb/576f067976d320f5f0114a8d9fa1215425441bb35627b1993e5afd8111e5/cloudpickle-3.1.2.tar.gz", hash = "sha256:7fda9eb655c9c230dab534f1983763de5835249750e85fbcef43aaa30a9a2414", size = 22330, upload-time = "2025-11-03T09:25:26.604Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/88/39/799be3f2f0f38cc727ee3b4f1445fe6d5e4133064ec2e4115069418a5bb6/cloudpickle-3.1.2-py3-none-any.whl", hash = "sha256:9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a", size = 22228, upload-time = "2025-11-03T09:25:25.534Z" },
+]
+
+[[package]]
+name = "clr-loader"
+version = "0.2.10"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cffi", marker = "(python_full_version == '3.13.*' and sys_platform == 'win32') or (python_full_version == '3.13.*' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (python_full_version == '3.13.*' and sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (python_full_version == '3.13.*' and sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/18/24/c12faf3f61614b3131b5c98d3bf0d376b49c7feaa73edca559aeb2aee080/clr_loader-0.2.10.tar.gz", hash = "sha256:81f114afbc5005bafc5efe5af1341d400e22137e275b042a8979f3feb9fc9446", size = 83605, upload-time = "2026-01-03T23:13:06.984Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c8/61/cf819f8e8bb4d4c74661acf2498ba8d4a296714be3478d21eaabf64f5b9b/clr_loader-0.2.10-py3-none-any.whl", hash = "sha256:ebbbf9d511a7fe95fa28a95a4e04cd195b097881dfe66158dc2c281d3536f282", size = 56483, upload-time = "2026-01-03T23:13:05.439Z" },
 ]
 
 [[package]]
@@ -328,7 +346,7 @@ version = "1.87.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cmeel" },
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.13.*' or sys_platform != 'linux'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/98/ee/a4c9eff9efe87945b770a3b773630cd72cb5f178de2daec719507e0f6024/cmeel_boost-1.87.0.1.tar.gz", hash = "sha256:c1b706e1f0c878693a96f6c92072596dcdf27bd14833b1cbbffd65a8b7e8d00f", size = 4075, upload-time = "2025-02-13T03:46:52.858Z" }
 wheels = [
@@ -509,7 +527,7 @@ name = "contourpy"
 version = "1.3.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/58/01/1253e6698a07380cd31a736d248a3f2a50a7c88779a1813da27503cadc2a/contourpy-1.3.3.tar.gz", hash = "sha256:083e12155b210502d0bca491432bb04d56dc3432f95a979b429f2848c3dbe880", size = 13466174, upload-time = "2025-07-26T12:03:12.549Z" }
 wheels = [
@@ -577,7 +595,7 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "dill" },
     { name = "filelock" },
-    { name = "fsspec", extra = ["http"], marker = "extra == 'extra-14-learn-robotics-cpu' or extra == 'extra-14-learn-robotics-cuda'" },
+    { name = "fsspec", extra = ["http"], marker = "(python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cuda') or (python_full_version == '3.13.*' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "httpx" },
     { name = "huggingface-hub" },
     { name = "multiprocess" },
@@ -723,15 +741,6 @@ name = "docopt"
 version = "0.6.2"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a2/55/8f8cab2afd404cf578136ef2cc5dfb50baa1761b68c9da1fb1e4eed343c9/docopt-0.6.2.tar.gz", hash = "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491", size = 25901, upload-time = "2014-06-16T11:18:57.406Z" }
-
-[[package]]
-name = "docutils"
-version = "0.22.4"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ae/b6/03bb70946330e88ffec97aefd3ea75ba575cb2e762061e0e62a213befee8/docutils-0.22.4.tar.gz", hash = "sha256:4db53b1fde9abecbb74d91230d32ab626d94f6badfc575d6db9194a49df29968", size = 2291750, upload-time = "2025-12-18T19:00:26.443Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/02/10/5da547df7a391dcde17f59520a231527b8571e6f46fc8efb02ccb370ab12/docutils-0.22.4-py3-none-any.whl", hash = "sha256:d0013f540772d1420576855455d050a2180186c91c15779301ac2ccb3eeb68de", size = 633196, upload-time = "2025-12-18T19:00:18.077Z" },
-]
 
 [[package]]
 name = "draccus"
@@ -1086,6 +1095,15 @@ wheels = [
 ]
 
 [[package]]
+name = "haikunator"
+version = "2.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/af/58/6a000ee0ec34cac5c78669359a8b1db969f1f511454a140ad3d193714ba2/haikunator-2.1.0.zip", hash = "sha256:91ee3949a3a613cac037ddde0b16b17062e248376b11491436e49d5ddc75ff9b", size = 4933, upload-time = "2016-09-20T17:36:00.843Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/43/fa/130968f1a1bb1461c287b9ff35c630460801783243acda2cbf3a4c5964a5/haikunator-2.1.0-py2.py3-none-any.whl", hash = "sha256:66f68b15345b279f78a5fffd4ab56cfb19a9dbb1f41b7f442472efd4cb83458e", size = 4595, upload-time = "2016-09-20T17:35:58.142Z" },
+]
+
+[[package]]
 name = "hebi-py"
 version = "2.11.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1269,19 +1287,19 @@ name = "ipykernel"
 version = "7.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "appnope", marker = "sys_platform == 'darwin' or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
-    { name = "comm" },
-    { name = "debugpy" },
-    { name = "ipython" },
-    { name = "jupyter-client" },
-    { name = "jupyter-core" },
-    { name = "matplotlib-inline" },
-    { name = "nest-asyncio" },
-    { name = "packaging" },
-    { name = "psutil" },
-    { name = "pyzmq" },
-    { name = "tornado" },
-    { name = "traitlets" },
+    { name = "appnope", marker = "(python_full_version == '3.13.*' and sys_platform == 'darwin') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "comm", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "debugpy", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "ipython", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "jupyter-client", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "jupyter-core", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "matplotlib-inline", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "nest-asyncio", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "packaging", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "psutil", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pyzmq", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "tornado", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "traitlets", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ca/8d/b68b728e2d06b9e0051019640a40a9eb7a88fcd82c2e1b5ce70bef5ff044/ipykernel-7.2.0.tar.gz", hash = "sha256:18ed160b6dee2cbb16e5f3575858bc19d8f1fe6046a9a680c708494ce31d909e", size = 176046, upload-time = "2026-02-06T16:43:27.403Z" }
 wheels = [
@@ -1293,16 +1311,16 @@ name = "ipython"
 version = "9.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
-    { name = "decorator" },
-    { name = "ipython-pygments-lexers" },
-    { name = "jedi" },
-    { name = "matplotlib-inline" },
-    { name = "pexpect", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
-    { name = "prompt-toolkit" },
-    { name = "pygments" },
-    { name = "stack-data" },
-    { name = "traitlets" },
+    { name = "colorama", marker = "(python_full_version == '3.13.*' and sys_platform == 'win32') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'win32' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "decorator", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "ipython-pygments-lexers", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "jedi", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "matplotlib-inline", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pexpect", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32') or (python_full_version != '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "prompt-toolkit", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pygments", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "stack-data", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "traitlets", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/86/28/a4698eda5a8928a45d6b693578b135b753e14fa1c2b36ee9441e69a45576/ipython-9.11.0.tar.gz", hash = "sha256:2a94bc4406b22ecc7e4cb95b98450f3ea493a76bec8896cda11b78d7752a6667", size = 4427354, upload-time = "2026-03-05T08:57:30.549Z" }
 wheels = [
@@ -1314,7 +1332,7 @@ name = "ipython-pygments-lexers"
 version = "1.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "pygments" },
+    { name = "pygments", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/ef/4c/5dd1d8af08107f88c7f741ead7a40854b8ac24ddf9ae850afbcf698aa552/ipython_pygments_lexers-1.1.1.tar.gz", hash = "sha256:09c0138009e56b6854f9535736f4171d855c8c08a563a0dcd8022f78355c7e81", size = 8393, upload-time = "2025-01-17T11:24:34.505Z" }
 wheels = [
@@ -1347,12 +1365,12 @@ wheels = [
 ]
 
 [[package]]
-name = "itsdangerous"
-version = "2.2.0"
+name = "itables"
+version = "2.7.3"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/9c/cb/8ac0172223afbccb63986cc25049b154ecfb5e85932587206f42317be31d/itsdangerous-2.2.0.tar.gz", hash = "sha256:e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173", size = 54410, upload-time = "2024-04-16T21:28:15.614Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/85/43/c438b31429d4e8cefc76c7cba80a1c948d2e18d74589fb771ea719474bbf/itables-2.7.3.tar.gz", hash = "sha256:7a9680da20aa6495868265d397f1a8cc03d8fdbc592760d3ddb10b4d6081ff73", size = 2428026, upload-time = "2026-03-22T20:05:14.373Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/04/96/92447566d16df59b2a776c0fb82dbc4d9e07cd95062562af01e408583fc4/itsdangerous-2.2.0-py3-none-any.whl", hash = "sha256:c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef", size = 16234, upload-time = "2024-04-16T21:28:14.499Z" },
+    { url = "https://files.pythonhosted.org/packages/79/a5/60a55bd4cb9488d21adcdce88625e1de9bc14ea454677160c162132838cb/itables-2.7.3-py3-none-any.whl", hash = "sha256:b24ebd6a4ab3edab200f41c56e20a12b12b95ec15d3697aeb9bee71d92c008a9", size = 2462653, upload-time = "2026-03-22T20:05:11.819Z" },
 ]
 
 [[package]]
@@ -1360,7 +1378,7 @@ name = "jedi"
 version = "0.19.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "parso" },
+    { name = "parso", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/72/3a/79a912fbd4d8dd6fbb02bf69afd3bb72cf0c729bb3063c6f4498603db17a/jedi-0.19.2.tar.gz", hash = "sha256:4770dc3de41bde3966b02eb84fbcf557fb33cce26ad23da12c742fb50ecb11f0", size = 1231287, upload-time = "2024-11-11T01:41:42.873Z" }
 wheels = [
@@ -1396,11 +1414,11 @@ name = "jupyter-client"
 version = "8.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "jupyter-core" },
-    { name = "python-dateutil" },
-    { name = "pyzmq" },
-    { name = "tornado" },
-    { name = "traitlets" },
+    { name = "jupyter-core", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "python-dateutil", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pyzmq", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "tornado", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "traitlets", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/05/e4/ba649102a3bc3fbca54e7239fb924fd434c766f855693d86de0b1f2bec81/jupyter_client-8.8.0.tar.gz", hash = "sha256:d556811419a4f2d96c869af34e854e3f059b7cc2d6d01a9cd9c85c267691be3e", size = 348020, upload-time = "2026-01-08T13:55:47.938Z" }
 wheels = [
@@ -1412,8 +1430,8 @@ name = "jupyter-core"
 version = "5.9.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "platformdirs" },
-    { name = "traitlets" },
+    { name = "platformdirs", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "traitlets", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/02/49/9d1284d0dc65e2c757b74c6687b6d319b02f822ad039e5c512df9194d9dd/jupyter_core-5.9.1.tar.gz", hash = "sha256:4d09aaff303b9566c3ce657f580bd089ff5c91f5f89cf7d8846c3cdf465b5508", size = 89814, upload-time = "2025-10-16T19:19:18.444Z" }
 wheels = [
@@ -1504,12 +1522,14 @@ wheels = [
 [[package]]
 name = "learn-robotics"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
-    { name = "ipykernel" },
-    { name = "marimo" },
-    { name = "matplotlib" },
-    { name = "numpy" },
+    { name = "haikunator", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "ipykernel", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "itables", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "matplotlib", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "numpy", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 
 [package.optional-dependencies]
@@ -1529,13 +1549,15 @@ cuda = [
 
 [package.metadata]
 requires-dist = [
+    { name = "haikunator", specifier = ">=2.1.0" },
     { name = "ipykernel", specifier = ">=7.1.0" },
+    { name = "itables", specifier = ">=2.7.3" },
     { name = "lerobot", extras = ["aloha", "pusht", "async", "peft", "feetech", "smolvla", "xvla", "hilserl", "kinematics", "phone"], marker = "extra == 'cpu'" },
     { name = "lerobot", extras = ["async", "peft", "smolvla", "xvla", "kinematics"], marker = "extra == 'cuda'", specifier = ">=0.4.3" },
-    { name = "marimo", specifier = ">=0.21.1" },
     { name = "matplotlib", specifier = ">=3.10.8" },
     { name = "numpy", specifier = ">=2.2" },
     { name = "rerun-sdk", extras = ["notebook"], marker = "extra == 'cpu'", specifier = ">=0.26.2" },
+    { name = "toga", specifier = ">=0.5.3" },
     { name = "torch", marker = "extra == 'cpu'", specifier = ">=2.7,<2.11.0", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "learn-robotics", extra = "cpu" } },
     { name = "torch", marker = "extra == 'cuda'", specifier = ">=2.7,<2.11.0", index = "https://download.pytorch.org/whl/cu130", conflict = { package = "learn-robotics", extra = "cuda" } },
     { name = "torchvision", marker = "extra == 'cpu'", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "learn-robotics", extra = "cpu" } },
@@ -1558,7 +1580,7 @@ dependencies = [
     { name = "einops" },
     { name = "gymnasium" },
     { name = "huggingface-hub" },
-    { name = "imageio", extra = ["ffmpeg"], marker = "extra == 'extra-14-learn-robotics-cpu' or extra == 'extra-14-learn-robotics-cuda'" },
+    { name = "imageio", extra = ["ffmpeg"], marker = "(python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cuda') or (python_full_version == '3.13.*' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "jsonlines" },
     { name = "numpy" },
     { name = "opencv-python-headless" },
@@ -1631,36 +1653,6 @@ xvla = [
 ]
 
 [[package]]
-name = "loro"
-version = "1.10.3"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/7d/27/ea6f3298fc87ea5f2d60ebfbca088e7d9b2ceb3993f67c83bfb81778ec01/loro-1.10.3.tar.gz", hash = "sha256:68184ab1c2ab94af6ad4aaba416d22f579cabee0b26cbb09a1f67858207bbce8", size = 68833, upload-time = "2025-12-09T10:14:06.644Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/75/67/8467cc1c119149ada86903b67ce10fc4b47fb6eb2a8ca5f94c0938fd010f/loro-1.10.3-cp313-cp313-macosx_10_12_x86_64.whl", hash = "sha256:380ef692c5272e8b607be2ee6a8eef5113e65dc38e6739526c30e3db6abc3fbc", size = 3239527, upload-time = "2025-12-09T10:11:33.884Z" },
-    { url = "https://files.pythonhosted.org/packages/bc/3b/d1a01af3446cb98890349215bea7e71ba49dc3e50ffbfb90c5649657a8b8/loro-1.10.3-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:ed966ce6ff1fb3787b3f6c4ed6dd036baa5fb738b84a466a5e764f2ab534ccc2", size = 3044767, upload-time = "2025-12-09T10:11:18.777Z" },
-    { url = "https://files.pythonhosted.org/packages/6b/93/37f891fa46767001ae2518697fb01fc187497e3a5238fe28102be626055d/loro-1.10.3-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d4d7c8d2f3d88578fdf69845a9ae16fc5ea3ac54aa838a6bf43a24ce11908220", size = 3292648, upload-time = "2025-12-09T10:08:15.404Z" },
-    { url = "https://files.pythonhosted.org/packages/6c/67/82273eeba2416b0410595071eda1eefcdf4072c014d44d2501b660aa7145/loro-1.10.3-cp313-cp313-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:62283c345bfeedef19c8a6d029cd8830e5d2c20b5fb45975d8a70a8a30a7944b", size = 3353181, upload-time = "2025-12-09T10:08:50.144Z" },
-    { url = "https://files.pythonhosted.org/packages/82/33/894dccf132bece82168dfbe61fad25a13ed89d18f20649f99e87c38f9228/loro-1.10.3-cp313-cp313-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:d1e7e6ae091179fa5f0fca1f8612fde20236ee0a678744bf51ff7d26103ea04f", size = 3712583, upload-time = "2025-12-09T10:09:27.934Z" },
-    { url = "https://files.pythonhosted.org/packages/b2/b7/99292729d8b271bcc4bff5faa20b33e4c749173af4c9cb9d34880ae3b4c8/loro-1.10.3-cp313-cp313-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:6abc6de4876aa205498cef52a002bc38662fbd8d742351ea0f535479208b8b1c", size = 3421491, upload-time = "2025-12-09T10:10:01.63Z" },
-    { url = "https://files.pythonhosted.org/packages/be/fb/188b808ef1d9b6d842d53969b99a16afb1b71f04739150959c8946345d0e/loro-1.10.3-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:acbbfd24cf28a71bbdad8544852e9bbba0ba8535f8221f8859b2693555fa8356", size = 3352623, upload-time = "2025-12-09T10:10:57.361Z" },
-    { url = "https://files.pythonhosted.org/packages/53/cc/e2d008cc24bddcf05d1a15b8907a73b1731921ab40897f73a3385fdd274a/loro-1.10.3-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:5faf4ebbe8ca39605024f16dbbbde354365f4e2dcfda82c753797461b504bbd3", size = 3687687, upload-time = "2025-12-09T10:10:34.453Z" },
-    { url = "https://files.pythonhosted.org/packages/ec/b6/4251822674230027103caa4fd46a1e83c4d676500074e7ab297468bf8f40/loro-1.10.3-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:e049c21b292c4ff992b23a98812840735db84620721c10ae7f047a921202d090", size = 3474316, upload-time = "2025-12-09T10:11:51.207Z" },
-    { url = "https://files.pythonhosted.org/packages/c4/54/ecff3ec08d814f3b9ec1c78a14ecf2e7ff132a71b8520f6aa6ad1ace0056/loro-1.10.3-cp313-cp313-musllinux_1_2_armv7l.whl", hash = "sha256:20e8dacfb827c1f7ffb73e127029d7995a9ab2c3b7b7bc3ecc91d22ee32d78d0", size = 3622069, upload-time = "2025-12-09T10:12:27.059Z" },
-    { url = "https://files.pythonhosted.org/packages/ac/84/c1b8251000f46df5f4d043af8c711bdbff9818727d26429378e0f3a5115e/loro-1.10.3-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:1b743c1c4f93f5b4f0e12efbb352d26e9f80bcbf20f45d9c70f3d0b522f42060", size = 3667722, upload-time = "2025-12-09T10:13:02.012Z" },
-    { url = "https://files.pythonhosted.org/packages/ef/13/c5c02776f4ad52c6361b95e1d7396c29071533cef45e3861a2e35745be27/loro-1.10.3-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:446d67bc9e28036a5a5e03526d28a1559ef2a47b3ccad6b07820dae123cc3697", size = 3564952, upload-time = "2025-12-09T10:13:37.227Z" },
-    { url = "https://files.pythonhosted.org/packages/1e/f1/63d4bc63a1521a9b577f6d13538ec4790865584fdf87569d5af943792406/loro-1.10.3-cp313-cp313-win32.whl", hash = "sha256:45d7d8ec683599897695bb714771baccabc1b4c4a412283cc39787c7a59f7ff0", size = 2720952, upload-time = "2025-12-09T10:14:30.17Z" },
-    { url = "https://files.pythonhosted.org/packages/29/3c/65c8b0b7f96c9b4fbd458867cf91f30fcd58ac25449d8ba9303586061671/loro-1.10.3-cp313-cp313-win_amd64.whl", hash = "sha256:a42bf73b99b07fed11b65feb0a5362b33b19de098f2235848687f4c41204830e", size = 2953768, upload-time = "2025-12-09T10:14:11.965Z" },
-    { url = "https://files.pythonhosted.org/packages/4e/e9/f6a242f61aa4d8b56bd11fa467be27d416401d89cc3244b58651a3a44c88/loro-1.10.3-cp313-cp313t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:4866325b154aeebcd34be106c7597acf150c374481ac3c12035a1af715ac0f01", size = 3289791, upload-time = "2025-12-09T10:08:16.926Z" },
-    { url = "https://files.pythonhosted.org/packages/a7/81/8f5f4d6805658c654264e99467f3f46facdbb2062cbf86743768ee4b942a/loro-1.10.3-cp313-cp313t-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:ea7b8849660a28ce8cd90a82db4f76c23453836fcbc88f5767feaaf8739045e2", size = 3348007, upload-time = "2025-12-09T10:08:53.305Z" },
-    { url = "https://files.pythonhosted.org/packages/c3/15/bba0fad18ec5561a140e9781fd2b38672210b52e847d207c57ae85379efd/loro-1.10.3-cp313-cp313t-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:9e82cdaf9a5892557d3167e07ed5093f87dfa31ef860a63b0eac6c0c2f435705", size = 3707937, upload-time = "2025-12-09T10:09:29.165Z" },
-    { url = "https://files.pythonhosted.org/packages/7a/b2/5519c92bd4f9cde068dc60ba35d7f3e4f8cce41e7bf39febd4fb08908e97/loro-1.10.3-cp313-cp313t-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:c7ee99e5dc844fb20fca830906a0d721022ad1c37aad0b1a440c4ecb98d0c02f", size = 3416744, upload-time = "2025-12-09T10:10:02.956Z" },
-    { url = "https://files.pythonhosted.org/packages/81/ba/92d97c27582c0ce12bb83df19b9e080c0dfe95068966296a4fa2279c0477/loro-1.10.3-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:153c297672ad98d0fe6ff8985decf1e64528ad1dd01ae1452bb83bdeb31f858f", size = 3470978, upload-time = "2025-12-09T10:11:52.707Z" },
-    { url = "https://files.pythonhosted.org/packages/f3/8b/acb39b0e74af1c317d3121e75a4bc5bc77d7fda5a79c60399746486f60d9/loro-1.10.3-cp313-cp313t-musllinux_1_2_armv7l.whl", hash = "sha256:0ed72f8c6a5f521252ee726954055339abba3fcf00404fb4b5c2da168f0cce79", size = 3615039, upload-time = "2025-12-09T10:12:28.631Z" },
-    { url = "https://files.pythonhosted.org/packages/4f/c3/154e3361e5ef42012f6842dbd93f8fbace6eec06517b5a4a9f8c4a46e873/loro-1.10.3-cp313-cp313t-musllinux_1_2_i686.whl", hash = "sha256:f612ab17acdac16c0139e63ff45b33175ebfb22e61a60eb7929a4583389348d6", size = 3663731, upload-time = "2025-12-09T10:13:03.557Z" },
-    { url = "https://files.pythonhosted.org/packages/c6/dd/a283cf5b1c957e0bbc67503a10e17606a8f8c87f51d3cf3d83dc3a0ac88a/loro-1.10.3-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:f2741db05c79f3618c954bac90f4572d28c01c243884453f379e9a8738f93d81", size = 3558807, upload-time = "2025-12-09T10:13:38.926Z" },
-]
-
-[[package]]
 name = "lxml"
 version = "6.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1684,43 +1676,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/76/04/5c5e2b8577bc936e219becb2e98cdb1aca14a4921a12995b9d0c523502ae/lxml-6.0.2-cp313-cp313-win32.whl", hash = "sha256:e8cd2415f372e7e5a789d743d133ae474290a90b9023197fd78f32e2dc6873e2", size = 3610700, upload-time = "2025-09-22T04:02:24.465Z" },
     { url = "https://files.pythonhosted.org/packages/fe/0a/4643ccc6bb8b143e9f9640aa54e38255f9d3b45feb2cbe7ae2ca47e8782e/lxml-6.0.2-cp313-cp313-win_amd64.whl", hash = "sha256:b30d46379644fbfc3ab81f8f82ae4de55179414651f110a1514f0b1f8f6cb2d7", size = 4010347, upload-time = "2025-09-22T04:02:26.286Z" },
     { url = "https://files.pythonhosted.org/packages/31/ef/dcf1d29c3f530577f61e5fe2f1bd72929acf779953668a8a47a479ae6f26/lxml-6.0.2-cp313-cp313-win_arm64.whl", hash = "sha256:13dcecc9946dca97b11b7c40d29fba63b55ab4170d3c0cf8c0c164343b9bfdcf", size = 3671248, upload-time = "2025-09-22T04:02:27.918Z" },
-]
-
-[[package]]
-name = "marimo"
-version = "0.21.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "click" },
-    { name = "docutils" },
-    { name = "itsdangerous" },
-    { name = "jedi" },
-    { name = "loro" },
-    { name = "markdown" },
-    { name = "msgspec" },
-    { name = "narwhals" },
-    { name = "packaging" },
-    { name = "psutil" },
-    { name = "pygments" },
-    { name = "pymdown-extensions" },
-    { name = "pyyaml" },
-    { name = "starlette" },
-    { name = "tomlkit" },
-    { name = "uvicorn" },
-    { name = "websockets" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e6/32/5e85046f1c79050cd1c29db95ed1626285c2dcd2f41b7cd60a46656770be/marimo-0.21.1.tar.gz", hash = "sha256:d18ceec8aca9b4e1def60247e1abe2fec476abeef51e2d0d5d1079ea37f86f55", size = 38367517, upload-time = "2026-03-18T15:05:54.124Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c8/82/69a545901f1c33fa8c1541a0ef1e4238adeb262ce77993ae892692fe967b/marimo-0.21.1-py3-none-any.whl", hash = "sha256:ad184f2ef297a5206bc3219ebbae3ea33e0ba9902ddb68c171bd2c44724db35a", size = 38785023, upload-time = "2026-03-18T15:05:49.463Z" },
-]
-
-[[package]]
-name = "markdown"
-version = "3.10.2"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/2b/f4/69fa6ed85ae003c2378ffa8f6d2e3234662abd02c10d216c0ba96081a238/markdown-3.10.2.tar.gz", hash = "sha256:994d51325d25ad8aa7ce4ebaec003febcce822c3f8c911e3b17c52f7f589f950", size = 368805, upload-time = "2026-02-09T14:57:26.942Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/de/1f/77fa3081e4f66ca3576c896ae5d31c3002ac6607f9747d2e3aa49227e464/markdown-3.10.2-py3-none-any.whl", hash = "sha256:e91464b71ae3ee7afd3017d9f358ef0baf158fd9a298db92f1d4761133824c36", size = 108180, upload-time = "2026-02-09T14:57:25.787Z" },
 ]
 
 [[package]]
@@ -1770,15 +1725,15 @@ name = "matplotlib"
 version = "3.10.8"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "contourpy" },
-    { name = "cycler" },
-    { name = "fonttools" },
-    { name = "kiwisolver" },
-    { name = "numpy" },
-    { name = "packaging" },
-    { name = "pillow" },
-    { name = "pyparsing" },
-    { name = "python-dateutil" },
+    { name = "contourpy", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "cycler", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "fonttools", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "kiwisolver", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "numpy", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "packaging", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pillow", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pyparsing", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "python-dateutil", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/8a/76/d3c6e3a13fe484ebe7718d14e269c9569c4eb0020a968a327acb3b9a8fe6/matplotlib-3.10.8.tar.gz", hash = "sha256:2299372c19d56bcd35cf05a2738308758d32b9eaed2371898d8f5bd33f084aa3", size = 34806269, upload-time = "2025-12-10T22:56:51.155Z" }
 wheels = [
@@ -1803,7 +1758,7 @@ name = "matplotlib-inline"
 version = "0.2.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "traitlets" },
+    { name = "traitlets", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/c7/74/97e72a36efd4ae2bccb3463284300f8953f199b5ffbc04cbbb0ec78f74b1/matplotlib_inline-0.2.1.tar.gz", hash = "sha256:e1ee949c340d771fc39e241ea75683deb94762c8fa5f2927ec57c83c4dffa9fe", size = 8110, upload-time = "2025-10-23T09:00:22.126Z" }
 wheels = [
@@ -1853,22 +1808,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e0/47/dd32fa426cc72114383ac549964eecb20ecfd886d1e5ccf5340b55b02f57/mpmath-1.3.0.tar.gz", hash = "sha256:7a28eb2a9774d00c7bc92411c19a89209d5da7c4c9a9e227be8330a23a25b91f", size = 508106, upload-time = "2023-03-07T16:47:11.061Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl", hash = "sha256:a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c", size = 536198, upload-time = "2023-03-07T16:47:09.197Z" },
-]
-
-[[package]]
-name = "msgspec"
-version = "0.20.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/ea/9c/bfbd12955a49180cbd234c5d29ec6f74fe641698f0cd9df154a854fc8a15/msgspec-0.20.0.tar.gz", hash = "sha256:692349e588fde322875f8d3025ac01689fead5901e7fb18d6870a44519d62a29", size = 317862, upload-time = "2025-11-24T03:56:28.934Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/8a/d1/b902d38b6e5ba3bdddbec469bba388d647f960aeed7b5b3623a8debe8a76/msgspec-0.20.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:9c1ff8db03be7598b50dd4b4a478d6fe93faae3bd54f4f17aa004d0e46c14c46", size = 196463, upload-time = "2025-11-24T03:55:43.405Z" },
-    { url = "https://files.pythonhosted.org/packages/57/b6/eff0305961a1d9447ec2b02f8c73c8946f22564d302a504185b730c9a761/msgspec-0.20.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:f6532369ece217fd37c5ebcfd7e981f2615628c21121b7b2df9d3adcf2fd69b8", size = 188650, upload-time = "2025-11-24T03:55:44.761Z" },
-    { url = "https://files.pythonhosted.org/packages/99/93/f2ec1ae1de51d3fdee998a1ede6b2c089453a2ee82b5c1b361ed9095064a/msgspec-0.20.0-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:f9a1697da2f85a751ac3cc6a97fceb8e937fc670947183fb2268edaf4016d1ee", size = 218834, upload-time = "2025-11-24T03:55:46.441Z" },
-    { url = "https://files.pythonhosted.org/packages/28/83/36557b04cfdc317ed8a525c4993b23e43a8fbcddaddd78619112ca07138c/msgspec-0.20.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:7fac7e9c92eddcd24c19d9e5f6249760941485dff97802461ae7c995a2450111", size = 224917, upload-time = "2025-11-24T03:55:48.06Z" },
-    { url = "https://files.pythonhosted.org/packages/8f/56/362037a1ed5be0b88aced59272442c4b40065c659700f4b195a7f4d0ac88/msgspec-0.20.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:f953a66f2a3eb8d5ea64768445e2bb301d97609db052628c3e1bcb7d87192a9f", size = 222821, upload-time = "2025-11-24T03:55:49.388Z" },
-    { url = "https://files.pythonhosted.org/packages/92/75/fa2370ec341cedf663731ab7042e177b3742645c5dd4f64dc96bd9f18a6b/msgspec-0.20.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:247af0313ae64a066d3aea7ba98840f6681ccbf5c90ba9c7d17f3e39dbba679c", size = 227227, upload-time = "2025-11-24T03:55:51.125Z" },
-    { url = "https://files.pythonhosted.org/packages/f1/25/5e8080fe0117f799b1b68008dc29a65862077296b92550632de015128579/msgspec-0.20.0-cp313-cp313-win_amd64.whl", hash = "sha256:67d5e4dfad52832017018d30a462604c80561aa62a9d548fc2bd4e430b66a352", size = 189966, upload-time = "2025-11-24T03:55:52.458Z" },
-    { url = "https://files.pythonhosted.org/packages/79/b6/63363422153937d40e1cb349c5081338401f8529a5a4e216865decd981bf/msgspec-0.20.0-cp313-cp313-win_arm64.whl", hash = "sha256:91a52578226708b63a9a13de287b1ec3ed1123e4a088b198143860c087770458", size = 175378, upload-time = "2025-11-24T03:55:53.721Z" },
 ]
 
 [[package]]
@@ -1959,15 +1898,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a2/6e/371856a3fb9d31ca8dac321cda606860fa4548858c0cc45d9d1d4ca2628b/mypy_extensions-1.1.0.tar.gz", hash = "sha256:52e68efc3284861e772bbcd66823fde5ae21fd2fdb51c62a211403730b916558", size = 6343, upload-time = "2025-04-22T14:54:24.164Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/79/7b/2c79738432f5c924bef5071f933bcc9efd0473bac3b4aa584a6f7c1c8df8/mypy_extensions-1.1.0-py3-none-any.whl", hash = "sha256:1be4cccdb0f2482337c4743e60421de3a356cd97508abadd57d47403e94f5505", size = 4963, upload-time = "2025-04-22T14:54:22.983Z" },
-]
-
-[[package]]
-name = "narwhals"
-version = "2.18.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/59/96/45218c2fdec4c9f22178f905086e85ef1a6d63862dcc3cd68eb60f1867f5/narwhals-2.18.1.tar.gz", hash = "sha256:652a1fcc9d432bbf114846688884c215f17eb118aa640b7419295d2f910d2a8b", size = 620578, upload-time = "2026-03-24T15:11:25.456Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/3f/c3/06490e98393dcb4d6ce2bf331a39335375c300afaef526897881fbeae6ab/narwhals-2.18.1-py3-none-any.whl", hash = "sha256:a0a8bb80205323851338888ba3a12b4f65d352362c8a94be591244faf36504ad", size = 444952, upload-time = "2026-03-24T15:11:23.801Z" },
 ]
 
 [[package]]
@@ -2194,7 +2124,7 @@ name = "opencv-python"
 version = "4.13.0.92"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.13.*' or sys_platform != 'linux'" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fc/6f/5a28fef4c4a382be06afe3938c64cc168223016fa520c5abaf37e8862aa5/opencv_python-4.13.0.92-cp37-abi3-macosx_13_0_arm64.whl", hash = "sha256:caf60c071ec391ba51ed00a4a920f996d0b64e3e46068aac1f646b5de0326a19", size = 46247052, upload-time = "2026-02-05T07:01:25.046Z" },
@@ -2212,7 +2142,7 @@ name = "opencv-python-headless"
 version = "4.12.0.88"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.13.*' or sys_platform != 'linux'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a4/63/6861102ec149c3cd298f4d1ea7ce9d6adbc7529221606ff1dab991a19adb/opencv-python-headless-4.12.0.88.tar.gz", hash = "sha256:cfdc017ddf2e59b6c2f53bc12d74b6b0be7ded4ec59083ea70763921af2b6c09", size = 95379675, upload-time = "2025-07-07T09:21:06.815Z" }
 wheels = [
@@ -2247,7 +2177,7 @@ name = "pandas"
 version = "3.0.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy" },
+    { name = "numpy", marker = "python_full_version == '3.13.*' or sys_platform != 'linux'" },
     { name = "python-dateutil" },
     { name = "tzdata", marker = "sys_platform == 'emscripten' or sys_platform == 'win32'" },
 ]
@@ -2307,7 +2237,7 @@ name = "pexpect"
 version = "4.9.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "ptyprocess", marker = "(sys_platform != 'emscripten' and sys_platform != 'win32') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda')" },
+    { name = "ptyprocess", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version == '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32') or (python_full_version != '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version != '3.13.*' and sys_platform != 'emscripten' and sys_platform != 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (python_full_version == '3.13.*' and sys_platform == 'win32' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/42/92/cc564bf6381ff43ce1f4d06852fc19a2f11d180f23dc32d9588bee2f149d/pexpect-4.9.0.tar.gz", hash = "sha256:ee7d41123f3c9911050ea2c2dac107568dc43b2d3b0c7557a33212c398ead30f", size = 166450, upload-time = "2023-11-25T09:07:26.339Z" }
 wheels = [
@@ -2408,7 +2338,7 @@ name = "prompt-toolkit"
 version = "3.0.52"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "wcwidth" },
+    { name = "wcwidth", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a1/96/06e01a7b38dce6fe1db213e061a4602dd6032a8a97ef6c1a862537732421/prompt_toolkit-3.0.52.tar.gz", hash = "sha256:28cde192929c8e7321de85de1ddbe736f1375148b02f2e17edd840042b1be855", size = 434198, upload-time = "2025-08-27T15:24:02.057Z" }
 wheels = [
@@ -2545,6 +2475,17 @@ wheels = [
 ]
 
 [[package]]
+name = "pycairo"
+version = "1.29.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/22/d9/1728840a22a4ef8a8f479b9156aa2943cd98c3907accd3849fb0d5f82bfd/pycairo-1.29.0.tar.gz", hash = "sha256:f3f7fde97325cae80224c09f12564ef58d0d0f655da0e3b040f5807bd5bd3142", size = 665871, upload-time = "2025-11-11T19:13:01.584Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f0/21/3f477dc318dd4e84a5ae6301e67284199d7e5a2384f3063714041086b65d/pycairo-1.29.0-cp313-cp313-win32.whl", hash = "sha256:3eb382a4141591807073274522f7aecab9e8fa2f14feafd11ac03a13a58141d7", size = 750949, upload-time = "2025-11-11T19:12:12.198Z" },
+    { url = "https://files.pythonhosted.org/packages/43/34/7d27a333c558d6ac16dbc12a35061d389735e99e494ee4effa4ec6d99bed/pycairo-1.29.0-cp313-cp313-win_amd64.whl", hash = "sha256:91114e4b3fbf4287c2b0788f83e1f566ce031bda49cf1c3c3c19c3e986e95c38", size = 844149, upload-time = "2025-11-11T19:12:19.171Z" },
+    { url = "https://files.pythonhosted.org/packages/15/43/e782131e23df69e5c8e631a016ed84f94bbc4981bf6411079f57af730a23/pycairo-1.29.0-cp313-cp313-win_arm64.whl", hash = "sha256:09b7f69a5ff6881e151354ea092137b97b0b1f0b2ab4eb81c92a02cc4a08e335", size = 693595, upload-time = "2025-11-11T19:12:23.445Z" },
+]
+
+[[package]]
 name = "pycparser"
 version = "3.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2618,17 +2559,13 @@ wheels = [
 ]
 
 [[package]]
-name = "pymdown-extensions"
-version = "10.21"
+name = "pygobject"
+version = "3.56.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "markdown" },
-    { name = "pyyaml" },
+    { name = "pycairo", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version == '3.13.*' and python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and 'freebsd' in sys_platform) or (python_full_version != '3.13.*' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version != '3.13.*' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ba/63/06673d1eb6d8f83c0ea1f677d770e12565fb516928b4109c9e2055656a9e/pymdown_extensions-10.21.tar.gz", hash = "sha256:39f4a020f40773f6b2ff31d2cd2546c2c04d0a6498c31d9c688d2be07e1767d5", size = 853363, upload-time = "2026-02-15T20:44:06.748Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/6f/2c/5b079febdc65e1c3fb2729bf958d18b45be7113828528e8a0b5850dd819a/pymdown_extensions-10.21-py3-none-any.whl", hash = "sha256:91b879f9f864d49794c2d9534372b10150e6141096c3908a455e45ca72ad9d3f", size = 268877, upload-time = "2026-02-15T20:44:05.464Z" },
-]
+sdist = { url = "https://files.pythonhosted.org/packages/a2/80/09247a2be28af2c2240132a0af6c1005a2b1d089242b13a2cd782d2de8d7/pygobject-3.56.2.tar.gz", hash = "sha256:b816098969544081de9eecedb94ad6ac59c77e4d571fe7051f18bebcec074313", size = 1409059, upload-time = "2026-03-25T16:14:04.008Z" }
 
 [[package]]
 name = "pymunk"
@@ -2793,7 +2730,7 @@ name = "python-dateutil"
 version = "2.9.0.post0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "six" },
+    { name = "six", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee498c46e004a0eb49bc148f2fd230864601a86dcf6db/python-dateutil-2.9.0.post0.tar.gz", hash = "sha256:37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3", size = 342432, upload-time = "2024-03-01T18:36:20.211Z" }
 wheels = [
@@ -2819,6 +2756,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/86/f5/8c0653e5bb54e0cbdfe27bf32d41f27bc4e12faa8742778c17f2a71be2c0/python-xlib-0.33.tar.gz", hash = "sha256:55af7906a2c75ce6cb280a584776080602444f75815a7aff4d287bb2d7018b32", size = 269068, upload-time = "2022-12-25T18:53:00.824Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fc/b8/ff33610932e0ee81ae7f1269c890f697d56ff74b9f5b2ee5d9b7fa2c5355/python_xlib-0.33-py2.py3-none-any.whl", hash = "sha256:c3534038d42e0df2f1392a1b30a15a4ff5fdc2b86cfa94f072bf11b10a164398", size = 182185, upload-time = "2022-12-25T18:52:58.662Z" },
+]
+
+[[package]]
+name = "pythonnet"
+version = "3.0.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "clr-loader", marker = "(python_full_version == '3.13.*' and sys_platform == 'win32') or (python_full_version == '3.13.*' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9a/d6/1afd75edd932306ae9bd2c2d961d603dc2b52fcec51b04afea464f1f6646/pythonnet-3.0.5.tar.gz", hash = "sha256:48e43ca463941b3608b32b4e236db92d8d40db4c58a75ace902985f76dac21cf", size = 239212, upload-time = "2024-12-13T08:30:44.393Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/cd/f1/bfb6811df4745f92f14c47a29e50e89a36b1533130fcc56452d4660bd2d6/pythonnet-3.0.5-py3-none-any.whl", hash = "sha256:f6702d694d5d5b163c9f3f5cc34e0bed8d6857150237fae411fefb883a656d20", size = 297506, upload-time = "2024-12-13T08:30:40.661Z" },
 ]
 
 [[package]]
@@ -2856,7 +2805,7 @@ name = "pyzmq"
 version = "27.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "cffi", marker = "implementation_name == 'pypy' or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "cffi", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and implementation_name == 'pypy') or (python_full_version != '3.13.*' and python_full_version == '3.13.*' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (implementation_name == 'pypy' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (implementation_name == 'pypy' and sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (implementation_name != 'pypy' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (implementation_name == 'pypy' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/04/0b/3c9baedbdf613ecaa7aa07027780b8867f57b6293b6ee50de316c9f3222b/pyzmq-27.1.0.tar.gz", hash = "sha256:ac0765e3d44455adb6ddbf4417dcce460fc40a05978c08efdf2948072f6db540", size = 281750, upload-time = "2025-09-08T23:10:18.157Z" }
 wheels = [
@@ -3005,6 +2954,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b3/c6/f3b320c27991c46f43ee9d856302c70dc2d0fb2dba4842ff739d5f46b393/rich-14.3.3.tar.gz", hash = "sha256:b8daa0b9e4eef54dd8cf7c86c03713f53241884e814f4e2f5fb342fe520f639b", size = 230582, upload-time = "2026-02-19T17:23:12.474Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/14/25/b208c5683343959b670dc001595f2f3737e051da617f66c31f7c4fa93abc/rich-14.3.3-py3-none-any.whl", hash = "sha256:793431c1f8619afa7d3b52b2cdec859562b950ea0d4b6b505397612db8d5362d", size = 310458, upload-time = "2026-02-19T17:23:13.732Z" },
+]
+
+[[package]]
+name = "rubicon-objc"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/4f/d2/d39ecd205661a5c14c90dbd92a722a203848a3621785c9783716341de427/rubicon_objc-0.5.3.tar.gz", hash = "sha256:74c25920c5951a05db9d3a1aac31d23816ec7dacc841a5b124d911b99ea71b9a", size = 171512, upload-time = "2025-12-03T03:51:10.264Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/93/ab/e834c01138c272fb2e37d2f3c7cba708bc694dbc7b3f03b743f29ceb92d5/rubicon_objc-0.5.3-py3-none-any.whl", hash = "sha256:31dedcda9be38435f5ec067906e1eea5d0ddb790330e98a22e94ff424758b415", size = 64414, upload-time = "2025-12-03T03:51:09.082Z" },
 ]
 
 [[package]]
@@ -3175,9 +3133,9 @@ name = "stack-data"
 version = "0.6.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "asttokens" },
-    { name = "executing" },
-    { name = "pure-eval" },
+    { name = "asttokens", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "executing", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pure-eval", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/28/e3/55dcc2cfbc3ca9c29519eb6884dd1415ecb53b0e934862d3559ddcb7e20b/stack_data-0.6.3.tar.gz", hash = "sha256:836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9", size = 44707, upload-time = "2023-09-30T13:58:05.479Z" }
 wheels = [
@@ -3248,6 +3206,116 @@ wheels = [
 ]
 
 [[package]]
+name = "toga"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "toga-android", marker = "(python_full_version == '3.13.*' and sys_platform == 'android') or (sys_platform == 'android' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'android' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'android' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-cocoa", marker = "(python_full_version == '3.13.*' and sys_platform == 'darwin') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-gtk", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version != '3.13.*' and python_full_version == '3.13.*' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (python_full_version == '3.13.*' and 'freebsd' in sys_platform) or (python_full_version != '3.13.*' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and 'freebsd' in sys_platform and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-ios", marker = "(python_full_version == '3.13.*' and sys_platform == 'ios') or (sys_platform == 'ios' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'ios' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'ios' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-web", marker = "(python_full_version == '3.13.*' and sys_platform == 'emscripten') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-winforms", marker = "(python_full_version == '3.13.*' and sys_platform == 'win32') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'win32' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e8/b2/2a671f88bdc00234f86eafaf4990157a76f1252ba82027bf21a58924a1f3/toga-0.5.3.tar.gz", hash = "sha256:4dc555c1cdff459e1224f55e71cb5c44c98c04b665a6d4cc49a7d40c6b0fc071", size = 3899, upload-time = "2025-12-03T06:50:19.357Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/db/45/ceb4021e46a1dbad10a4101d61f34b1b1d5c8213bbf71071d4f17d27fa88/toga-0.5.3-py3-none-any.whl", hash = "sha256:d535e7829cfbff747349e1932e45b5492845da43998321bac81fd6a19c2f0f72", size = 3371, upload-time = "2025-12-03T06:50:07.774Z" },
+]
+
+[[package]]
+name = "toga-android"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "toga-core", marker = "(python_full_version == '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32') or (python_full_version != '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and sys_platform == 'win32' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9b/7f/35432cf9b7c930dec725b15ef0dcd63c9679ffdfda6cf60df3935950b84c/toga_android-0.5.3.tar.gz", hash = "sha256:e0279abfc13455cfc3d46d3b9338a81f3aa1ff5f51e402be6f518a7ee596a8e9", size = 75527, upload-time = "2025-12-03T06:50:12.133Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fe/6a/9384cc8c2d4beee833170c2d40db6ebcbbf57b68750cbfefa5ba46bc8daa/toga_android-0.5.3-py3-none-any.whl", hash = "sha256:edbc109154b15fb59e27221c78b649a9d8cda07d878aa478b93348ff328cb2e7", size = 70039, upload-time = "2025-12-03T06:50:05.198Z" },
+]
+
+[[package]]
+name = "toga-cocoa"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fonttools", marker = "(python_full_version == '3.13.*' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "rubicon-objc", marker = "(python_full_version == '3.13.*' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-core", marker = "(python_full_version == '3.13.*' and sys_platform == 'darwin') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b7/01/af143dfb4b6231ad5f5b1592707f28a76a10eb908e0a051ccd26b0f70c4e/toga_cocoa-0.5.3.tar.gz", hash = "sha256:0688b1fa9279abc959e814261185468bc9598f2664e8fd1046b2681d0e65aec2", size = 473372, upload-time = "2025-12-03T06:50:10.168Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d7/c0/794278b93bb85d9baf346aafd31d1b0aae43373016fe86b52c755d7e6753/toga_cocoa-0.5.3-py3-none-any.whl", hash = "sha256:0cf2b53200132ace4a675658ced76039e6c2a28097bfbe3303a0d51d86a3cd4b", size = 469435, upload-time = "2025-12-03T06:50:04.643Z" },
+]
+
+[[package]]
+name = "toga-core"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "travertino", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/7b/65/02d6fc7572b09e100791b9053e3e47bb72c0ab97cd90a3ffb069e30fdcf1/toga_core-0.5.3.tar.gz", hash = "sha256:b8a32fb73f53088eec503bcf536e5b1da548147e356ae7c2077943c34af64519", size = 1023659, upload-time = "2025-12-03T06:50:18.656Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ac/83/7da1a3ca22d67b514ccaecc3342eb6cc2dc1a34852b8c29cc3199f4d2bfd/toga_core-0.5.3-py3-none-any.whl", hash = "sha256:6dc50df6575c18bf34f385167808b027122f16ee25f143907293362178c01fab", size = 147585, upload-time = "2025-12-03T06:50:06.837Z" },
+]
+
+[[package]]
+name = "toga-gtk"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "packaging", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version == '3.13.*' and python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and 'freebsd' in sys_platform) or (python_full_version != '3.13.*' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version != '3.13.*' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pycairo", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version == '3.13.*' and python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and 'freebsd' in sys_platform) or (python_full_version != '3.13.*' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version != '3.13.*' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pygobject", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version == '3.13.*' and python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and 'freebsd' in sys_platform) or (python_full_version != '3.13.*' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version != '3.13.*' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-core", marker = "(python_full_version == '3.13.*' and python_full_version == '3.13.*' and sys_platform == 'linux') or (python_full_version == '3.13.*' and python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and 'freebsd' in sys_platform) or (python_full_version != '3.13.*' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version != '3.13.*' and 'freebsd' in sys_platform and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'linux' and 'freebsd' not in sys_platform and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/52/50/b76b8d74e43b5f9cd690e3a39c816dbfb75cab4209b696e6561c5f31f009/toga_gtk-0.5.3.tar.gz", hash = "sha256:38a566d14e90912c299d38e0a6e3a1ff6596a8db31412a9e37f4d23158b4a87f", size = 82525, upload-time = "2025-12-03T06:50:16.583Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/ab/ca/1f65e926c4369b9a2d366498418b5d5e76b1dfe7b2448448869dc15de86e/toga_gtk-0.5.3-py3-none-any.whl", hash = "sha256:4e48a01b4aace7cd7e653bf82b2c31780e5b7f1d138130bb5ab73bc3f2bb5fa5", size = 75458, upload-time = "2025-12-03T06:50:05.718Z" },
+]
+
+[[package]]
+name = "toga-ios"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "fonttools", marker = "(python_full_version == '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32') or (python_full_version != '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and sys_platform == 'win32' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "rubicon-objc", marker = "(python_full_version == '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32') or (python_full_version != '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and sys_platform == 'win32' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-core", marker = "(python_full_version == '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32') or (python_full_version != '3.13.*' and sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (python_full_version == '3.13.*' and sys_platform == 'win32' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32' and extra != 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/73/fa/112a7dba51c298d3561f6b3c78a4ba337289f8c92a425c9a84d7b6a6f7a3/toga_ios-0.5.3.tar.gz", hash = "sha256:d63d5bdb4553308f5d31f96cd7841f55eb5c9f95359f3fe615a162bc7d65adfc", size = 443452, upload-time = "2025-12-03T06:50:07.917Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/dc/18/01f01be00b2b64118f4ea0a786e8b4af3b9f30a98d064b1f2f65a02f1063/toga_ios-0.5.3-py3-none-any.whl", hash = "sha256:9c6f89f5227bff4bea3e5d057ff686f0ac749ad6dbfdef8c24d0757888d0df13", size = 440695, upload-time = "2025-12-03T06:50:04.369Z" },
+]
+
+[[package]]
+name = "toga-web"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "toga-core", marker = "(python_full_version == '3.13.*' and sys_platform == 'emscripten') or (sys_platform != 'emscripten' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c7/fc/a6b13ce7b507f4406543c90d8e6e23fe313d125d5b4c8dc7195c84c67c9d/toga_web-0.5.3.tar.gz", hash = "sha256:ac32c865522d3d8ad411809ef2ac466e0a3e38b376a1fca922270c69ae4041b5", size = 19156, upload-time = "2025-12-03T06:50:10.188Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3a/a5/1c9f3cc32fe7fef7f6d3471ff415098ed8fc2d03f7706c0197326caac4aa/toga_web-0.5.3-py3-none-any.whl", hash = "sha256:7aba660a854195e1f6cf343e278d9570970461529b26f387b6132d7d65e5181d", size = 25002, upload-time = "2025-12-03T06:50:02.883Z" },
+]
+
+[[package]]
+name = "toga-winforms"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pillow", marker = "(python_full_version == '3.13.*' and sys_platform == 'win32') or (python_full_version == '3.13.*' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "pythonnet", marker = "(python_full_version == '3.13.*' and sys_platform == 'win32') or (python_full_version == '3.13.*' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "toga-core", marker = "(python_full_version == '3.13.*' and sys_platform == 'win32') or (python_full_version == '3.13.*' and sys_platform != 'linux' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'win32' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'darwin' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'emscripten' and extra != 'extra-14-learn-robotics-cpu' and extra != 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a7/c1/5287f1fa586ce5d1fcfa289b2010ac089ab5fded2877213802aa4dab45de/toga_winforms-0.5.3.tar.gz", hash = "sha256:0980a5b45e8213e43d01ab6b48d89d5f2548609b7609eb8a301cfaae38700af9", size = 345515, upload-time = "2025-12-03T06:50:03.461Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/50/5e/988ccf1affd2c518def8379f33c448da087987b3cf014b3e46475693120a/toga_winforms-0.5.3-py3-none-win_amd64.whl", hash = "sha256:7b30bed029576eeef9a9308b80f775954cb2886c20d4fc889060d3b86ccb60ef", size = 344890, upload-time = "2025-12-03T06:50:01.317Z" },
+]
+
+[[package]]
 name = "tokenizers"
 version = "0.22.2"
 source = { registry = "https://pypi.org/simple" }
@@ -3283,15 +3351,6 @@ wheels = [
 ]
 
 [[package]]
-name = "tomlkit"
-version = "0.14.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c3/af/14b24e41977adb296d6bd1fb59402cf7d60ce364f90c890bd2ec65c43b5a/tomlkit-0.14.0.tar.gz", hash = "sha256:cf00efca415dbd57575befb1f6634c4f42d2d87dbba376128adb42c121b87064", size = 187167, upload-time = "2026-01-13T01:14:53.304Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b5/11/87d6d29fb5d237229d67973a6c9e06e048f01cf4994dee194ab0ea841814/tomlkit-0.14.0-py3-none-any.whl", hash = "sha256:592064ed85b40fa213469f81ac584f67a4f2992509a7c3ea2d632208623a3680", size = 39310, upload-time = "2026-01-13T01:14:51.965Z" },
-]
-
-[[package]]
 name = "torch"
 version = "2.10.0"
 source = { registry = "https://download.pytorch.org/whl/cpu" }
@@ -3308,10 +3367,10 @@ dependencies = [
     { name = "typing-extensions", marker = "(sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 wheels = [
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0-1-cp313-none-macosx_11_0_arm64.whl", hash = "sha256:b39cafff7229699f9d6e172cac74d85fd71b568268e439e08d9c540e54732a3e" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0-2-cp313-none-macosx_11_0_arm64.whl", hash = "sha256:470de4176007c2700735e003a830828a88d27129032a3add07291da07e2a94e8" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0-cp313-cp313t-macosx_14_0_arm64.whl", hash = "sha256:339e05502b6c839db40e88720cb700f5a3b50cda332284873e851772d41b2c1e" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0-cp313-none-macosx_11_0_arm64.whl", hash = "sha256:840351da59cedb7bcbc51981880050813c19ef6b898a7fecf73a3afc71aff3fe" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0-1-cp313-none-macosx_11_0_arm64.whl", hash = "sha256:b39cafff7229699f9d6e172cac74d85fd71b568268e439e08d9c540e54732a3e" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0-2-cp313-none-macosx_11_0_arm64.whl", hash = "sha256:470de4176007c2700735e003a830828a88d27129032a3add07291da07e2a94e8" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0-cp313-cp313t-macosx_14_0_arm64.whl", hash = "sha256:339e05502b6c839db40e88720cb700f5a3b50cda332284873e851772d41b2c1e" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0-cp313-none-macosx_11_0_arm64.whl", hash = "sha256:840351da59cedb7bcbc51981880050813c19ef6b898a7fecf73a3afc71aff3fe" },
 ]
 
 [[package]]
@@ -3319,7 +3378,8 @@ name = "torch"
 version = "2.10.0+cpu"
 source = { registry = "https://download.pytorch.org/whl/cpu" }
 resolution-markers = [
-    "sys_platform == 'linux'",
+    "sys_platform == 'linux' and 'freebsd' in sys_platform",
+    "sys_platform == 'linux' and 'freebsd' not in sys_platform",
     "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux'",
     "sys_platform == 'emscripten'",
 ]
@@ -3328,22 +3388,22 @@ dependencies = [
     { name = "fsspec", marker = "(sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "jinja2", marker = "(sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "networkx", marker = "(sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
-    { name = "setuptools", marker = "(sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
+    { name = "setuptools", marker = "(python_full_version == '3.13.*' and sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cpu') or (sys_platform == 'darwin' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "sympy", marker = "(sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "typing-extensions", marker = "(sys_platform != 'darwin' and extra == 'extra-14-learn-robotics-cpu') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
 ]
 wheels = [
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-linux_aarch64.whl", hash = "sha256:fd215f3d0f681905c5b56b0630a3d666900a37fcc3ca5b937f95275c66f9fd9c" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-linux_s390x.whl", hash = "sha256:170a0623108055be5199370335cf9b41ba6875b3cb6f086db4aee583331a4899" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:e51994492cdb76edce29da88de3672a3022f9ef0ffd90345436948d4992be2c7" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:8d316e5bf121f1eab1147e49ad0511a9d92e4c45cc357d1ab0bee440da71a095" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-win_amd64.whl", hash = "sha256:b719da5af01b59126ac13eefd6ba3dd12d002dc0e8e79b8b365e55267a8189d3" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-win_arm64.whl", hash = "sha256:b67d91326e4ed9eccbd6b7d84ed7ffa43f93103aa3f0b24145f3001f3b11b714" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-linux_aarch64.whl", hash = "sha256:5af75e5f49de21b0bdf7672bc27139bd285f9e8dbcabe2d617a2eb656514ac36" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-linux_s390x.whl", hash = "sha256:ba51ef01a510baf8fff576174f702c47e1aa54389a9f1fba323bb1a5003ff0bf" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-manylinux_2_28_aarch64.whl", hash = "sha256:0fedcb1a77e8f2aaf7bfd21591bf6d1e0b207473268c9be16b17cb7783253969" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:106dd1930cb30a4a337366ba3f9b25318ebf940f51fd46f789281dd9e736bdc4" },
-    { url = "https://download.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-win_amd64.whl", hash = "sha256:eb1bde1ce198f05c8770017de27e001d404499cf552aaaa014569eff56ca25c0" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-linux_aarch64.whl", hash = "sha256:fd215f3d0f681905c5b56b0630a3d666900a37fcc3ca5b937f95275c66f9fd9c" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-linux_s390x.whl", hash = "sha256:170a0623108055be5199370335cf9b41ba6875b3cb6f086db4aee583331a4899" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:e51994492cdb76edce29da88de3672a3022f9ef0ffd90345436948d4992be2c7" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:8d316e5bf121f1eab1147e49ad0511a9d92e4c45cc357d1ab0bee440da71a095" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-win_amd64.whl", hash = "sha256:b719da5af01b59126ac13eefd6ba3dd12d002dc0e8e79b8b365e55267a8189d3" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313-win_arm64.whl", hash = "sha256:b67d91326e4ed9eccbd6b7d84ed7ffa43f93103aa3f0b24145f3001f3b11b714" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-linux_aarch64.whl", hash = "sha256:5af75e5f49de21b0bdf7672bc27139bd285f9e8dbcabe2d617a2eb656514ac36" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-linux_s390x.whl", hash = "sha256:ba51ef01a510baf8fff576174f702c47e1aa54389a9f1fba323bb1a5003ff0bf" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-manylinux_2_28_aarch64.whl", hash = "sha256:0fedcb1a77e8f2aaf7bfd21591bf6d1e0b207473268c9be16b17cb7783253969" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:106dd1930cb30a4a337366ba3f9b25318ebf940f51fd46f789281dd9e736bdc4" },
+    { url = "https://download-r2.pytorch.org/whl/cpu/torch-2.10.0%2Bcpu-cp313-cp313t-win_amd64.whl", hash = "sha256:eb1bde1ce198f05c8770017de27e001d404499cf552aaaa014569eff56ca25c0" },
 ]
 
 [[package]]
@@ -3352,8 +3412,10 @@ version = "2.10.0+cu130"
 source = { registry = "https://download.pytorch.org/whl/cu130" }
 resolution-markers = [
     "sys_platform == 'darwin'",
-    "platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "platform_machine != 'aarch64' and sys_platform == 'linux'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and 'freebsd' in sys_platform",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and 'freebsd' not in sys_platform",
+    "platform_machine != 'aarch64' and sys_platform == 'linux' and 'freebsd' in sys_platform",
+    "platform_machine != 'aarch64' and sys_platform == 'linux' and 'freebsd' not in sys_platform",
     "sys_platform == 'win32'",
     "sys_platform == 'emscripten'",
     "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32'",
@@ -3379,18 +3441,18 @@ dependencies = [
     { name = "nvidia-nvjitlink", marker = "(sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "nvidia-nvshmem-cu13", marker = "(sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "nvidia-nvtx", marker = "(sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
-    { name = "setuptools", marker = "extra == 'extra-14-learn-robotics-cuda'" },
+    { name = "setuptools", marker = "(python_full_version == '3.13.*' and extra == 'extra-14-learn-robotics-cuda') or (python_full_version != '3.13.*' and extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda') or (sys_platform != 'linux' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "sympy", marker = "extra == 'extra-14-learn-robotics-cuda'" },
     { name = "triton", marker = "(sys_platform == 'linux' and extra == 'extra-14-learn-robotics-cuda') or (extra == 'extra-14-learn-robotics-cpu' and extra == 'extra-14-learn-robotics-cuda')" },
     { name = "typing-extensions", marker = "extra == 'extra-14-learn-robotics-cuda'" },
 ]
 wheels = [
-    { url = "https://download.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:75780283308df9fede371eeda01e9607c8862a1803a2f2f31a08a2c0deaed342" },
-    { url = "https://download.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:7e0d9922e9e91f780b2761a0c5ebac3c15c9740bab042e1b59149afa6d6474eb" },
-    { url = "https://download.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313-win_amd64.whl", hash = "sha256:48af94af745a9dd9b42be81ea15b56aba981666bcfe10394dceca6d9476a50fa" },
-    { url = "https://download.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313t-manylinux_2_28_aarch64.whl", hash = "sha256:46699da91f0367d8dfa1b606cb0352aaf190b5853f463010e75ff08f15a94e7d" },
-    { url = "https://download.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:775d1fff07e302fb669d555a5005f781aa460aa80dff7a512e8e6e723f9def83" },
-    { url = "https://download.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313t-win_amd64.whl", hash = "sha256:b38e5b505b015903a51c2b3f12e50a9f152f92fe7e3992e79f504138cf90601d" },
+    { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:75780283308df9fede371eeda01e9607c8862a1803a2f2f31a08a2c0deaed342" },
+    { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:7e0d9922e9e91f780b2761a0c5ebac3c15c9740bab042e1b59149afa6d6474eb" },
+    { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313-win_amd64.whl", hash = "sha256:48af94af745a9dd9b42be81ea15b56aba981666bcfe10394dceca6d9476a50fa" },
+    { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313t-manylinux_2_28_aarch64.whl", hash = "sha256:46699da91f0367d8dfa1b606cb0352aaf190b5853f463010e75ff08f15a94e7d" },
+    { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:775d1fff07e302fb669d555a5005f781aa460aa80dff7a512e8e6e723f9def83" },
+    { url = "https://download-r2.pytorch.org/whl/cu130/torch-2.10.0%2Bcu130-cp313-cp313t-win_amd64.whl", hash = "sha256:b38e5b505b015903a51c2b3f12e50a9f152f92fe7e3992e79f504138cf90601d" },
 ]
 
 [[package]]
@@ -3425,7 +3487,8 @@ name = "torchvision"
 version = "0.25.0+cpu"
 source = { registry = "https://download.pytorch.org/whl/cpu" }
 resolution-markers = [
-    "sys_platform == 'linux'",
+    "sys_platform == 'linux' and 'freebsd' in sys_platform",
+    "sys_platform == 'linux' and 'freebsd' not in sys_platform",
     "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux'",
     "sys_platform == 'emscripten'",
 ]
@@ -3449,8 +3512,10 @@ version = "0.25.0+cu130"
 source = { registry = "https://download.pytorch.org/whl/cu130" }
 resolution-markers = [
     "sys_platform == 'darwin'",
-    "platform_machine == 'aarch64' and sys_platform == 'linux'",
-    "platform_machine != 'aarch64' and sys_platform == 'linux'",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and 'freebsd' in sys_platform",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and 'freebsd' not in sys_platform",
+    "platform_machine != 'aarch64' and sys_platform == 'linux' and 'freebsd' in sys_platform",
+    "platform_machine != 'aarch64' and sys_platform == 'linux' and 'freebsd' not in sys_platform",
     "sys_platform == 'win32'",
     "sys_platform == 'emscripten'",
     "sys_platform != 'darwin' and sys_platform != 'emscripten' and sys_platform != 'linux' and sys_platform != 'win32'",
@@ -3537,6 +3602,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/d5/1e/626c2d87c29a35fadc8de5624f4302e1ee56cff380d282d62cb3780e6620/transforms3d-0.4.2.tar.gz", hash = "sha256:e8b5df30eaedbee556e81c6938e55aab5365894e47d0a17615d7db7fd2393680", size = 1368797, upload-time = "2024-06-17T11:43:33.231Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/61/7a/f38385f1b2d5f54221baf1db3d6371dc6eef8041d95abff39576c694e9d9/transforms3d-0.4.2-py3-none-any.whl", hash = "sha256:1c70399d9e9473ecc23311fd947f727f7c69ed0b063244828c383aa1aefa5941", size = 1376759, upload-time = "2024-06-20T11:09:19.43Z" },
+]
+
+[[package]]
+name = "travertino"
+version = "0.5.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/c8/59/0940b241c3af6939a9c9fe22d218e77970b2fbeef7471dadafaeb3d59531/travertino-0.5.3.tar.gz", hash = "sha256:fdbdf3a2c78335ce6c357c334defe6f15e8315c0e213c43e59d1975e77df7cf3", size = 48923, upload-time = "2025-12-03T06:50:04.638Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8f/f0/dd7f32b7cb6e2102d5247150a57d74dc31fc09fea8a9212b7c2507e7df77/travertino-0.5.3-py3-none-any.whl", hash = "sha256:9f6f6840760af28295bba76aa175f35678aba33782ff29e78053b3cbdafafabf", size = 26118, upload-time = "2025-12-03T06:50:02.426Z" },
 ]
 
 [[package]]
@@ -3673,7 +3747,7 @@ dependencies = [
     { name = "gitpython" },
     { name = "packaging" },
     { name = "platformdirs" },
-    { name = "protobuf" },
+    { name = "protobuf", marker = "python_full_version == '3.13.*' or sys_platform != 'linux'" },
     { name = "pydantic" },
     { name = "pyyaml" },
     { name = "requests" },

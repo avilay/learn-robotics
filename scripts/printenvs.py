@@ -1,6 +1,6 @@
 import os
 
-print("YANTRA_ROBOT =", os.environ["YANTRA_ROBOT"])
-print("YANTRA_TELEOP =", os.environ["YANTRA_TELEOP"])
-print("YANTRA_GRIPPER_CAMERA =", os.environ["YANTRA_GRIPPER_CAMERA"])
-print("YANTRA_ENV_CAMERA =", os.environ["YANTRA_ENV_CAMERA"])
+print("ZEROMODE_ROBOT =", os.environ["ZEROMODE_ROBOT"])
+print("ZEROMODE_TELEOP =", os.environ["ZEROMODE_TELEOP"])
+print("ZEROMODE_GRIPPER_CAMERA =", os.environ["ZEROMODE_GRIPPER_CAMERA"])
+print("ZEROMODE_ENV_CAMERA =", os.environ["ZEROMODE_ENV_CAMERA"])
